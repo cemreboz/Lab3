@@ -1,5 +1,7 @@
 package org.translation;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,8 +27,8 @@ public class Main {
         // TODO Task: once you finish the JSONTranslator,
         //            you can use it here instead of the InLabByHandTranslator
         //            to try out the whole program!
-        // Translator translator = new JSONTranslator(null);
-        Translator translator = new InLabByHandTranslator();
+        Translator translator = new JSONTranslator(null);
+        // Translator translator = new InLabByHandTranslator();
 
         runProgram(translator);
     }
@@ -73,7 +75,17 @@ public class Main {
         //            and print them out; one per line
         //      hint: class Collections provides a static sort method
         // TODO Task: convert the country codes to the actual country names before sorting
-        System.out.println(countries);
+        List<String> countryNames = new ArrayList<>();
+        for (String countryCode : countries) {
+            String countryName = countries.fromLanguageCode; // Convert code to name
+            countryNames.add(countryName);
+        }
+
+        Collections.sort(countryNames);
+
+        for (String countryName : countryNames) {
+            System.out.println(countryName);
+        }
 
         System.out.println("select a country from above:");
 
@@ -87,6 +99,20 @@ public class Main {
         // TODO Task: replace the line below so that we sort the languages alphabetically and print them out; one
         //  per line
         // TODO Task: convert the language codes to the actual language names before sorting
+        List<String> languageCodes = translator.getCountryLanguages(country);
+        List<String> languageNames = new ArrayList<>();
+
+        for (String languageCode : languageCodes) {
+            String languageName = languageCode;
+            languageNames.add(languageName);
+        }
+
+        Collections.sort(languageNames);
+        for (String languageName : languageNames) {
+            System.out.println(languageName);
+        }
+
+
         System.out.println(translator.getCountryLanguages(country));
 
         System.out.println("select a language from above:");
